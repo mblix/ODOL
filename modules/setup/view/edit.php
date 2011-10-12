@@ -283,6 +283,14 @@ print $_lib['sess']->doctype ?>
     </td>
   </tr>
 
+  <tr>
+    <td colspan="2">
+        Factoring start over faktura lik
+    </td>
+    <td>
+      <? print $_lib['form3']->text(array('table' => 'setup.value', 'field' => 'factoringStartInvoiceId', 'value' => $setup['factoringStartInvoiceId'])) ?>
+    </td>
+  </tr>
 
 
   <tr>

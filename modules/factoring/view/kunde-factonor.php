@@ -7,7 +7,7 @@ $factoring_clientID = $setup['factoringID'];
 Header("Content-Disposition: attachment; filename=\"KUNDE.DAT\"\n");
 Header("Content-Type: text/plain\n");
 
-$sql = "SELECT a.AccountPlanID, a.OrgNumber, a.AccountName, a.Address, a.ZipCode, a.City, a.Mobile, a.CountryCode FROM accountplan a, invoiceout i WHERE a.AccountPlanID > 10000 AND a.AccountPlanID < 100000000 AND a.AccountPlanID = i.CompanyID AND YEAR(i.InvoiceDate) = YEAR(NOW()) AND i.CommentCustomer NOT LIKE '%%NOK%%'";
+$sql = "SELECT a.AccountPlanID, a.OrgNumber, a.AccountName, a.Address, a.ZipCode, a.City, a.Mobile, a.CountryCode FROM accountplan a, invoiceout i WHERE a.AccountPlanID > 10000 AND a.AccountPlanID < 100000000 AND a.AccountPlanID = i.CompanyID AND YEAR(i.InvoiceDate) = YEAR(NOW()) AND i.CommentCustomer NOT LIKE '%%NOK%%' AND InvoiceID >= '".$setup['factoringStartInvoiceId']."'";
 $result = $_lib['db']->db_query($sql);
 
 while ($row = $_lib['db']->db_fetch_assoc($result))

@@ -135,7 +135,7 @@ if(!$setup['factoring']) { if($row->KID)  { $params["invoiceData"]["KID"]     = 
 if($row->KID)  { $params["invoiceData"]["KID"]       = $row->KID; $params["kid"] = $row->KID; }
 
 /* Factoring setup */
-if($setup['factoring'])
+if($setup['factoring']  && $InvoiceID >= $setup['factoringStartInvoiceId'])
 {
 	$kidlogic = new lodo_logic_kid();
 	$factoringid = "90".$setup['factoringID'].str_pad($InvoiceID, 8, "0", STR_PAD_LEFT)."00";
@@ -214,7 +214,7 @@ if ($row->DeliveryCondition  != "")
 $myFakutra->addSumLine($params);
 
 
-if($setup['factoring']) 
+if($setup['factoring'] && $InvoiceID >= $setup['factoringStartInvoiceId']) 
 {
     $line1 = $setup['factoringExtra1'] . $setup['factoringExtra2'];
     $line2 = $setup['factoringExtra3'] . $setup['factoringExtra4'];
@@ -236,5 +236,4 @@ if($setup['factoring'])
 
 $myFakutra->fakturaGiro($params);
 $myFakutra->printFaktura();
-//print_r($myFakutra);
 ?>
