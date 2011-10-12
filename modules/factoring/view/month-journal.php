@@ -29,6 +29,7 @@ $sql = "SELECT
 		AND YEAR(i.InvoiceDate) = YEAR(NOW())
 		AND MONTH(i.InvoiceDate) = MONTH(NOW())
 		AND CommentCustomer NOT LIKE '%%NOK%%'
+		AND InvoiceID >= '".$setup['factoringStartInvoiceId']."'
 	ORDER BY
 		InvoiceDate
 	";
