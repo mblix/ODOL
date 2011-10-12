@@ -32,7 +32,7 @@ print $_lib['sess']->doctype ?>
     <th colspan="2" rowspan="2">Bilagstype</th>
     <th colspan="3">Balansekonto</th>
     <th colspan="2">Resultatkonto</th>
-  </tr>
+    </tr>
   <tr class="result">
     <th class="sub">Inn</th>
     <th class="sub">Ut</th>
@@ -172,34 +172,46 @@ print $_lib['sess']->doctype ?>
   <tr>
     <td colspan="7"><? print $_lib['form3']->text(array('table' => 'setup.value', 'field' => 'outgoing', 'value' => $setup['outgoing'])) ?> [blank (bruker lodo)/fakturabank (henter fra fakturabank)/empatix (faktura er i empatix)]</td>
   </tr>
-    <td class="BGColorDark">Valuta</td>
-    <td class="BGColorLight">
-<?php
-#Retrieve all currencies
-
-includelogic('exchange/exchange');
-
-$currencies = exchange::getAllCurrencies();
-?>
-      <select name="setup.value.localcurrency">
-<?
-foreach ($currencies as $currency) {
-?>
-<option value="<? echo $currency->CurrencyISO; ?>" <?php if (!empty($setup['localcurrency']) && $setup['localcurrency'] == $currency->CurrencyISO) echo 'selected="selected"'; ?>><? echo $currency->CurrencyISO; ?></option>
-<?
-}
-?>
-      </select>
-
-    </td>
   <tr>
-    <td colspan="7" align="right">
+    <th class="submenu" colspan="7">Factoring</td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <? print $_lib['form3']->checkbox(array('table' => 'setup.value', 'field' => 'factoring', 'value' => $setup['factoring'])) ?> Aktiver factoring
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+        Factoring kontonummer:
+    </td>
+    <td>
+      <? print $_lib['form3']->text(array('table' => 'setup.value', 'field' => 'factoringAccountno', 'value' => $setup['factoringAccountno'])) ?>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+        Factoring ID:
+    </td>
+    <td>
+      <? print $_lib['form3']->text(array('table' => 'setup.value', 'field' => 'factoringID', 'value' => $setup['factoringID'])) ?>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="7">
+      Ekstra tekst p&aring; faktura<br />
+      <? print $_lib['form3']->textarea(array('table' => 'setup.value', 'field' => 'factoringExtra', 
+                                              'value' => $setup['factoringExtra'], 'width' => '50', 'height' => '6')) ?>
+    </td>
+  </tr>
+  <tr>
+        <td colspan="7" align="right">
     <? if($_lib['sess']->get_person('AccessLevel') >= 2) { ?>
     <input type="submit" name="action_main_update" value="Lagre (S)" accesskey="S" />
     <? } ?>
     </td>
-    </form>
   </tr>
+  </form>
+
 </table>
 
 <?
