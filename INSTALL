@@ -1,7 +1,18 @@
-To install LODO
+Sane install instructions
 ---------------
+Prereq. lodo db and a functional customer db.
 
-symlink 
-ln -s lodo html
-chmod u+x install.sh
-./install.sh
+Ubuntu:
+apt-get install libapache2-mod-php5 php5-mysql
+
+Linux:
+Point virtualhost to /html folder
+Create lodo database and create customer datbase
+Set up conf/prefs_customer.inc, conf/default.inc and conf/prefs_lodo.inc
+
+Make the following symlinks:
+ln -s html lodo
+cd lodo
+ln -s index.php lib.php
+
+Update the Password field of person of the customer database with the mysql password function.
