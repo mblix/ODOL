@@ -319,17 +319,8 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
         <td colspan="7"><br><hr>
     </tr>
 </tbody>
-
 <tfoot>
     <tr>
-        <td>
-        <?
-	if(!$row->Locked) { 
-		print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_lock', 		'value'=>'L&aring;s (L)', 'accesskey'=>'L')); 
-	};
-
-        ?>
-        </td>
         <td>
         <?
 	    if($_lib['sess']->get_person('AccessLevel') >= 2 && $inline == 'edit' && $accounting->is_valid_accountperiod($_lib['date']->get_this_period($row->Period), $_lib['sess']->get_person('AccessLevel')))
@@ -344,6 +335,14 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
         {
            print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_newonthis', 'value'=>'Ny faktura ut i fra denne'));
         }
+        ?>
+        </td>
+        <td>
+        <?
+	if(!$row->Locked) { 
+		print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_lock', 		'value'=>'L&aring;s (L)', 'accesskey'=>'L')); 
+	};
+
         ?>
         </td>
 

@@ -7,6 +7,15 @@ $SalaryID = $_REQUEST['SalaryID'];
 $SalaryConfID = $_REQUEST['SalaryConfID'];
 $SalaryperiodconfID = $_REQUEST['SalaryperiodconfID'];
 
+if(isset($_COOKIE['SalaryperiodconfID']) && !isset($_REQUEST['SalaryperiodconfID']))
+{
+    $SalaryperiodconfID = $_COOKIE['SalaryperiodconfID'];
+}
+else
+{
+    setcookie("SalaryperiodconfID", $SalaryperiodconfID);
+}
+
 includelogic('accounting/accounting');
 $accounting = new accounting();
 require_once "record.inc";
