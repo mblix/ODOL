@@ -8,11 +8,11 @@ Header("Content-Disposition: attachment; filename=\"KUNDE.DAT\"\n");
 Header("Content-Type: text/plain\n");
 
 $sql = "SELECT a.AccountPlanID, a.OrgNumber, a.AccountName, a.Address, a.ZipCode, a.City, a.Mobile, a.Country FROM accountplan a, invoiceout i WHERE a.AccountPlanID > 10000 AND a.AccountPlanID < 100000000 AND a.AccountPlanID = i.CompanyID AND YEAR(i.InvoiceDate) = YEAR(NOW()) AND i.CommentCustomer NOT LIKE '%%NOK%%'";
-$result = mysql_query($sql);
+$result = $_lib['db']->db_query($sql);
 
-while ($row = mysql_fetch_assoc($result))
+while ($row = $_lib['db']->db_fetch_assoc($result))
 {
-printf("%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s\r\n",
+printf("V%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s\r\n",
 
 				$factoring_clientID, 	// 1: Annn
 				$row["AccountPlanID"], 	// 2: Kundenr

@@ -8,9 +8,9 @@ Header("Content-Disposition: attachment; filename=\"FAKTURA.DAT\"\n");
 Header("Content-Type: text/plain\n");
 
 $sql = "SELECT CompanyID, InvoiceID, DATE_FORMAT(InvoiceDate,'%y%m%d') InvoiceDate, DATE_FORMAT(DueDate,'%y%m%d') DueDate, TotalCustPrice FROM invoiceout WHERE YEAR(invoiceout.InvoiceDate) = YEAR(NOW()) AND MONTH(invoiceout.InvoiceDate) = MONTH(NOW()) AND CommentCustomer NOT LIKE '%%NOK%%'";
-$result = mysql_query($sql);
+$result = $_lib['db']->db_query($sql);
 
-while ($row = mysql_fetch_assoc($result))
+while ($row = $_lib['db']->db_fetch_assoc($result))
 {
         $elconline = "";
 
