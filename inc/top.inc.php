@@ -139,6 +139,14 @@ $topclass = 'topclass';
                                   <? } ?>                              
 
                                   <a href="<? print $_lib['sess']->dispatch ?>t=invoicerecurring.list">Repeterende faktura</a>
+				<?php
+				  $query_setup    = "select name, value from setup";
+ 				  $setup = $_lib['storage']->get_hash(array('query' => $query_setup, 'key' => 'name', 'value' => 'value'));
+				  if($setup['factoring'])
+				  {
+				    printf("<a href=\"%st=factoring.hentfiler\">Factoring: Hent filer</a>", $_lib['sess']->dispatch);
+				  }
+				?>
                                 </fieldset>
                                 </td>
                                 <td>
