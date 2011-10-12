@@ -11,6 +11,9 @@ includelogic('accounting/accounting');
 includelogic('invoicepdf/faktura');
 includelogic('kid/kid');
 
+$query_setup            = "select name, value from setup";
+$setup                  = $_lib['storage']->get_hash(array('query' => $query_setup, 'key' => 'name', 'value' => 'value'));
+
 $accounting = new accounting();
 require_once "record.inc";
 
@@ -125,7 +128,22 @@ if ($row_from->Email)
 
 $params["invoiceData"]["Fakturanr"] = $InvoiceID;
 $params["invoiceData"]["Kundenr"]   = $row->CustomerAccountPlanID;
-if($row->KID)  { $params["invoiceData"]["KID"]     = $row->KID; $params["kid"] = $row->KID; }
+
+/* Commented out for special factoring ingtegration if($row->KID)  { $params["invoiceData"]["KID"]     = $row->KID; $params["kid"] = $row->KID; }
+*/
+
+/* Add the kid at the left bottom of the invoice ( modified by ehjelle 17.11.09 ) */
+if($row->KID)  { $params["invoiceData"]["KID"]       = $row->KID; $params["kid"] = $row->KID; }
+
+/* SPECIAL FOR SPAREBANK1 FACTORING, NOT TO BE CHECKED IN IN REPO! ( modified by ehjelle 17.11.09 ) */
+$kidlogic = new lodo_logic_kid();
+$factoringid = "90922".str_pad($InvoiceID, 8, "0", STR_PAD_LEFT)."00";
+$kid = $factoringid.$kidlogic->gen_value_checksum($factoringid);
+
+$params["invoiceData"]["KID"] = $kid;
+$params["kid"] = $kid;
+// END SPECIAL FOR SPAREBANK1
+
 if($row->Note) $params["invoiceData"]["Merk"]      = $row->Note;
 
 $params["invoiceData"]["Side"] = "1";
@@ -192,6 +210,28 @@ if ($row->DeliveryCondition  != "")
     $myFakutra->addLongTextLine(array('tekst' => "Leverings betingelse: " . $row->DeliveryCondition));
 }
 $myFakutra->addSumLine($params);
+
+
+if($setup['factoring']) 
+{
+    $line1 = $setup['factoringExtra1'] . $setup['factoringExtra2'];
+    $line2 = $setup['factoringExtra3'] . $setup['factoringExtra4'];
+
+    $myFakutra->addLongTextLine(array('tekst' => ''));
+    $myFakutra->addLongTextLine(array('tekst' => $line1));
+    $myFakutra->addLongTextLine(array('tekst' => ''));
+    $myFakutra->addLongTextLine(array('tekst' => $line2));
+
+    $params["sender"]["name"] = $setup['factoringName'];
+    $params["sender"]["address1"] = $setup['factoringAdr1'];
+    $params["sender"]["address2"] = $setup['factoringAdr2'];
+    $params["sender"]["zip"] = $setup['factoringZip'];
+    $params["sender"]["city"] = $setup['factoringCity'];
+    $params["companyInfo"]["Kontonr"] = $setup['factoringAccountno'];
+}
+
+
+
 $myFakutra->fakturaGiro($params);
 $myFakutra->printFaktura();
 //print_r($myFakutra);

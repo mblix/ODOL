@@ -180,6 +180,55 @@ print $_lib['sess']->doctype ?>
       <? print $_lib['form3']->checkbox(array('table' => 'setup.value', 'field' => 'factoring', 'value' => $setup['factoring'])) ?> Aktiver factoring
     </td>
   </tr>
+
+  <tr>
+    <td colspan="2">
+        Factoring navn:
+    </td>
+    <td>
+      <? print $_lib['form3']->text(array('table' => 'setup.value', 'field' => 'factoringName', 'value' => $setup['factoringName'])) ?>
+    </td>
+  </tr>
+
+  <tr>
+    <td colspan="2">
+        Factoring addresse 1:
+    </td>
+    <td>
+      <? print $_lib['form3']->text(array('table' => 'setup.value', 'field' => 'factoringAdr1', 'value' => $setup['factoringAdr1'])) ?>
+    </td>
+  </tr>
+
+
+  <tr>
+    <td colspan="2">
+        Factoring addresse 2:
+    </td>
+    <td>
+      <? print $_lib['form3']->text(array('table' => 'setup.value', 'field' => 'factoringAdr2', 'value' => $setup['factoringAdr2'])) ?>
+    </td>
+  </tr>
+
+  <tr>
+    <td colspan="2">
+        Factoring postnummer:
+    </td>
+    <td>
+      <? print $_lib['form3']->text(array('table' => 'setup.value', 'field' => 'factoringZip', 'value' => $setup['factoringZip'])) ?>
+    </td>
+  </tr>
+
+  <tr>
+    <td colspan="2">
+        Factoring by:
+    </td>
+    <td>
+      <? print $_lib['form3']->text(array('table' => 'setup.value', 'field' => 'factoringCity', 'value' => $setup['factoringCity'])) ?>
+    </td>
+  </tr>
+
+
+
   <tr>
     <td colspan="2">
         Factoring kontonummer:
@@ -188,6 +237,7 @@ print $_lib['sess']->doctype ?>
       <? print $_lib['form3']->text(array('table' => 'setup.value', 'field' => 'factoringAccountno', 'value' => $setup['factoringAccountno'])) ?>
     </td>
   </tr>
+
   <tr>
     <td colspan="2">
         Factoring ID:
@@ -196,13 +246,45 @@ print $_lib['sess']->doctype ?>
       <? print $_lib['form3']->text(array('table' => 'setup.value', 'field' => 'factoringID', 'value' => $setup['factoringID'])) ?>
     </td>
   </tr>
+
   <tr>
-    <td colspan="7">
-      Ekstra tekst p&aring; faktura<br />
-      <? print $_lib['form3']->textarea(array('table' => 'setup.value', 'field' => 'factoringExtra', 
-                                              'value' => $setup['factoringExtra'], 'width' => '50', 'height' => '6')) ?>
+    <td colspan="2">
+        Factoring Extra tekst 1:
+    </td>
+    <td>
+      <? print $_lib['form3']->text(array('table' => 'setup.value', 'field' => 'factoringExtra1', 'value' => $setup['factoringExtra1'])) ?>
     </td>
   </tr>
+
+  <tr>
+    <td colspan="2">
+        Factoring Extra tekst 2:
+    </td>
+    <td>
+      <? print $_lib['form3']->text(array('table' => 'setup.value', 'field' => 'factoringExtra2', 'value' => $setup['factoringExtra2'])) ?>
+    </td>
+  </tr>
+
+  <tr>
+    <td colspan="2">
+        Factoring Extra tekst 3:
+    </td>
+    <td>
+      <? print $_lib['form3']->text(array('table' => 'setup.value', 'field' => 'factoringExtra3', 'value' => $setup['factoringExtra3'])) ?>
+    </td>
+  </tr>
+
+  <tr>
+    <td colspan="2">
+        Factoring Extra tekst 4:
+    </td>
+    <td>
+      <? print $_lib['form3']->text(array('table' => 'setup.value', 'field' => 'factoringExtra4', 'value' => $setup['factoringExtra4'])) ?>
+    </td>
+  </tr>
+
+
+
   <tr>
         <td colspan="7" align="right">
     <? if($_lib['sess']->get_person('AccessLevel') >= 2) { ?>
