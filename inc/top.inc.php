@@ -144,7 +144,7 @@ $topclass = 'topclass';
  				  $setup = $_lib['storage']->get_hash(array('query' => $query_setup, 'key' => 'name', 'value' => 'value'));
 				  if($setup['factoring'])
 				  {
-				    printf("<a href=\"%st=factoring.hentfiler\">Factoring: Hent filer</a>", $_lib['sess']->dispatch);
+				    printf("<a href=\"%st=factoring.download\">Factoring: Hent filer</a>", $_lib['sess']->dispatch);
 				  }
 				?>
                                 </fieldset>
