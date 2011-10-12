@@ -129,16 +129,18 @@ if ($row_from->Email)
 $params["invoiceData"]["Fakturanr"] = $InvoiceID;
 $params["invoiceData"]["Kundenr"]   = $row->CustomerAccountPlanID;
 
-/* Commented out for special factoring ingtegration if($row->KID)  { $params["invoiceData"]["KID"]     = $row->KID; $params["kid"] = $row->KID; }
-*/
+if(!$setup['factoring']) { if($row->KID)  { $params["invoiceData"]["KID"]     = $row->KID; $params["kid"] = $row->KID; } }
 
 /* Add the kid at the left bottom of the invoice ( modified by ehjelle 17.11.09 ) */
 if($row->KID)  { $params["invoiceData"]["KID"]       = $row->KID; $params["kid"] = $row->KID; }
 
-/* SPECIAL FOR SPAREBANK1 FACTORING, NOT TO BE CHECKED IN IN REPO! ( modified by ehjelle 17.11.09 ) */
-$kidlogic = new lodo_logic_kid();
-$factoringid = "90922".str_pad($InvoiceID, 8, "0", STR_PAD_LEFT)."00";
-$kid = $factoringid.$kidlogic->gen_value_checksum($factoringid);
+/* Factoring setup */
+if($setup['factoring'])
+{
+	$kidlogic = new lodo_logic_kid();
+	$factoringid = "90".$setup['factoringID'].str_pad($InvoiceID, 8, "0", STR_PAD_LEFT)."00";
+	$kid = $factoringid.$kidlogic->gen_value_checksum($factoringid);
+}
 
 $params["invoiceData"]["KID"] = $kid;
 $params["kid"] = $kid;
