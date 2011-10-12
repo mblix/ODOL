@@ -17,9 +17,6 @@ print $_lib['sess']->doctype ?>
     <title>Empatix login</title>
     <meta name="cvs"                content="$Id: login_screen.php,v 1.8 2005/09/08 08:51:17 thomasek Exp $" />
     <? require_once $_SETUP['HOME_DIR'] . "/code/lib/html/head.inc"; ?>
-    <script language="javascript">
-    	top.document.location = '/';
-    </script>
 </head>
 <body>
     <!-- SID: <? print session_id() ?>-->
