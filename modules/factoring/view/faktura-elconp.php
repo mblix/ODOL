@@ -1,4 +1,5 @@
 <?php
+$query_setup    = "select name, value from setup";
 $setup = $_lib['storage']->get_hash(array('query' => $query_setup, 'key' => 'name', 'value' => 'value'));
 $factoring_clientID = $setup['factoringID'];
 
