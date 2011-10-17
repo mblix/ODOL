@@ -19,13 +19,12 @@ printf("V%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s\r\n",
 				$row["AccountName"],	// 3: Navn
 				$row["Address"], 	// 4: Addresse1
 				NULL,			// 5: Addresse2
-				NULL,			// 6: Addresse3
 				$row["ZipCode"],	// 7: Postkode
 				$row["City"],		// 8: Poststed
 				$row["Mobile"],		// 9: Telefon
 				NULL,			// 10: Telefaks
 				$row["OrgNumber"],	// 11: Foretaksnummer
-				NULL,			// 12: Firma/privat
+				"F",			// 12: Firma/privat
 				NULL,			// 13: Bankkonto
 				$row["CountryCode"],	// 14: Landkode
 				NULL,			// 15: Språkkode
