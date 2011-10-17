@@ -138,7 +138,8 @@ if($row->KID)  { $params["invoiceData"]["KID"]       = $row->KID; $params["kid"]
 if($setup['factoring']  && $InvoiceID >= $setup['factoringStartInvoiceId'])
 {
 	$kidlogic = new lodo_logic_kid();
-	$factoringid = "90".$setup['factoringID'].str_pad($InvoiceID, 8, "0", STR_PAD_LEFT)."00";
+#	$factoringid = "90".$setup['factoringID'].str_pad($InvoiceID, 8, "0", STR_PAD_LEFT)."00";
+	$factoringid = $setup['factoringID'].str_pad($params["invoiceData"]["Kundenr"], 6, "0", STR_PAD_LEFT).str_pad($InvoiceID, 6, "0", STR_PAD_LEFT);
 	$kid = $factoringid.$kidlogic->gen_value_checksum($factoringid);
 }
 
