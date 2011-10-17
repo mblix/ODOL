@@ -46,9 +46,10 @@ while ($row = $_lib['db']->db_fetch_assoc($result))
 	/* 42-52 Fakturabeløp */
 	$elconline .= str_pad($price, 11 ,"0", STR_PAD_LEFT);
 	/* 53-68 KID (16) */
-	$kidlogic = new lodo_logic_kid();
-	$factoringid = "90".$setup['factoringID'].str_pad($InvoiceID, 8, "0", STR_PAD_LEFT)."00";
-	$kid = $factoringid.$kidlogic->gen_value_checksum($factoringid);
+        $kidlogic = new lodo_logic_kid();
+        $factoringid = $setup['factoringID'].str_pad($params["invoiceData"]["Kundenr"], 6, "0", STR_PAD_LEFT).str_pad($InvoiceID, 6, "0", STR_PAD_LEFT);
+        $kid = $factoringid.$kidlogic->gen_value_checksum($factoringid);
+	$elconline .= $kid;
 	/* 69-74 Referansenr (opprinnelig faktura) (6) */
 	$elconline .= str_pad($row["InvoiceID"], 6, "0", STR_PAD_LEFT);
 	/* 75-78 Rabattprosent (2) */
