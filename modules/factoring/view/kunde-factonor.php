@@ -12,25 +12,23 @@ $result = $_lib['db']->db_query($sql);
 
 while ($row = $_lib['db']->db_fetch_assoc($result))
 {
-printf("V%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s\r\n",
+printf("V%s;%s;%s;%s;%s;%s %s;%s;%s;%s;%s;%s;%s;%s;%s\r\n",
 
-				$factoring_clientID, 	// 1: Annn
+				$factoring_clientID, 	// 1: Vnnn
 				$row["AccountPlanID"], 	// 2: Kundenr
 				$row["AccountName"],	// 3: Navn
 				$row["Address"], 	// 4: Addresse1
 				NULL,			// 5: Addresse2
-				$row["ZipCode"],	// 7: Postkode
-				$row["City"],		// 8: Poststed
-				$row["Mobile"],		// 9: Telefon
-				NULL,			// 10: Telefaks
-				$row["OrgNumber"],	// 11: Foretaksnummer
-				"F",			// 12: Firma/privat
-				NULL,			// 13: Bankkonto
-				$row["CountryCode"],	// 14: Landkode
-				NULL,			// 15: Språkkode
-				NULL,			// 16: Valutakode
-				NULL,			// 17: e-postaddresse
-				$row["AccountName"]	// 18: alfasøkefelt	
+				$row["ZipCode"],	// 6: Postkode
+				$row["City"],		// 7: Poststed
+				$row["Mobile"],		// 8: Telefon
+				NULL,			// 9: Telefaks
+				$row["OrgNumber"],	// 10: Foretaksnummer
+				"F",			// 11: Firma/privat
+				NULL,			// 12: Bankkonto
+				$row["CountryCode"],	// 13: Landkode
+				NULL,			// 14: e-postaddresse
+				$row["AccountName"]	// 15: alfasøkefelt	
 				
 	);
 
