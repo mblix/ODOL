@@ -34,6 +34,7 @@ while ($row = $_lib['db']->db_fetch_assoc($result))
         /* 34-39 Buntdato */
         $elconline .= str_pad(NULL, 6, "0", STR_PAD_LEFT);
 	/* 40-41 Bilagskode (21=faktura, 22=kreditnota) */
+	$price = str_replace(".","",$row["TotalCustPrice"]);
         if (intval($price) < 0)
         {
                 /* 9 Kreditnota */
@@ -46,18 +47,18 @@ while ($row = $_lib['db']->db_fetch_assoc($result))
                 $elconline .= "21";
         }
 	/* 42-52 Fakturabeløp */
-	$elconline .= str_pad($price, 11 ,"0", STR_PAD_LEFT);
+	$elconline .= str_pad($price, 11,"0", STR_PAD_LEFT);
 	/* 53-68 KID (16) */
         $kidlogic = new lodo_logic_kid();
-        $factoringid = $setup['factoringID'].str_pad($params["invoiceData"]["Kundenr"], 6, "0", STR_PAD_LEFT).str_pad($InvoiceID, 6, "0", STR_PAD_LEFT);
+        $factoringid = $setup['factoringID'].str_pad($row["CompanyID"], 6, "0", STR_PAD_LEFT).str_pad($row["InvoiceID"], 6, "0", STR_PAD_LEFT);
         $kid = $factoringid.$kidlogic->gen_value_checksum($factoringid);
 	$elconline .= $kid;
 	/* 69-74 Referansenr (opprinnelig faktura) (6) */
 	$elconline .= str_pad($row["InvoiceID"], 6, "0", STR_PAD_LEFT);
-	/* 75-78 Rabattprosent (2) */
-	$elconline .= str_pad("00", 2, "0", STR_PAD_LEFT);
+	/* 75-78 Rabattprosent (4) */
+	$elconline .= str_pad("0000", 4, "0", STR_PAD_LEFT);
 	/* 79-84 Dato Rab Forfall Å M D (6) */
-	$elconline .= str_pad($row["InvoiceDate"], 6, "0", STR_PAD_LEFT);
+	$elconline .= str_pad($row["DueDate"], 6, "0", STR_PAD_LEFT);
 	/* 85-86 Landkode (2) */
 	$elconline .= str_pad("NO", 2, "0", STR_PAD_LEFT);
 	/* 87-89 Valuta (3) */
@@ -66,4 +67,3 @@ while ($row = $_lib['db']->db_fetch_assoc($result))
 	$elconline .= str_pad(" ", 39, "0", STR_PAD_LEFT);
 	echo($elconline."\r\n");
 }
-
