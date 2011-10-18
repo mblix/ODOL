@@ -30,7 +30,9 @@ while ($row = $_lib['db']->db_fetch_assoc($result))
 	/* 28-29 Avdeling */
 	$elconline .= str_pad(NULL, 2, "0", STR_PAD_LEFT);
 	/* 30-33 Buntnr */
-	$elconline .= str_pad(NULL, 6, "0". STR_PAD_LEFT);
+	$elconline .= str_pad(NULL, 4, "0", STR_PAD_LEFT);
+        /* 34-39 Buntdato */
+        $elconline .= str_pad(NULL, 6, "0", STR_PAD_LEFT);
 	/* 40-41 Bilagskode (21=faktura, 22=kreditnota) */
         if (intval($price) < 0)
         {
